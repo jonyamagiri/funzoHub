@@ -1,20 +1,30 @@
 const express = require("express");
+const dotenv = require("dotenv").config();
 const expressLayouts = require("express-ejs-layouts");
+const logger = require('morgan');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
-require("dotenv").config();
-
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(expressLayouts);
 
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
+app.use(logger('dev')); // adds logging functionality to console
 
-const routes = require("./server/routes/courseRoutes.js");
+
+// API Routes
+
+app.use('/api/courses', require('./server/routes/courseRoutes'));
+
+// Frontend Routes
+const routes = require("./server/routes/frontendRoutes");
 app.use("/", routes);
+
+
 
 app.listen(port, () => {
   console.log(`server listening on port ${port}`);
