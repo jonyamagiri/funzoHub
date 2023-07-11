@@ -1,8 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
+const connectDb = require('./server/utils/db');
 const expressLayouts = require("express-ejs-layouts");
 const logger = require('morgan');
 
+
+connectDb();
 const app = express();
 const port = process.env.PORT || 4000;
 
