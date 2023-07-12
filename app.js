@@ -20,8 +20,9 @@ app.use(logger('dev')); // adds logging functionality to console
 
 
 // API Routes
-
 app.use('/api/courses', require('./server/routes/courseRoutes'));
+app.use('/api/categories', require('./server/routes/categoryRoutes'));
+
 
 // Frontend Routes
 const routes = require("./server/routes/frontendRoutes");

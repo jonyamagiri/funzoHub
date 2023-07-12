@@ -14,13 +14,13 @@ const getCourses = asyncHandler(async(req, res) => {
 //@access public
 const createCourse = asyncHandler(async(req, res) => {
     console.log(req.body);
-    const { title, description, category, image } = req.body;
-    if (!title || !description || !category || !image) {
+    const { title, description, instructor, topics, category, image } = req.body;
+    if (!title || !description || !instructor || !topics || !category || !image ) {
         res.status(400);
         throw new Error('All fields are required!');
     }
     const course = await Course.create({
-        title, description, category, image
+        title, description, instructor, topics, category, image
     });
     res.status(201).json(course);
 });
@@ -41,14 +41,29 @@ const getCourse = asyncHandler(async(req, res) => {
 //@route PUT /api/courses/:id
 //@access public
 const updateCourse = asyncHandler(async(req, res) => {
-    res.status(200).json({ message: `update course for ${req.params.id}`});
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+        res.status(404);
+        throw new Error('Course not found');
+    }
+    const updatedCourse = await Course.findByIdAndUpdate(
+        req.params.id, req.body,
+        { new: true}
+    );
+    res.status(200).json(updatedCourse);
 });
 
 //@desc delete a course
 //@route DELETE /api/courses/:id
 //@access public
 const deleteCourse = asyncHandler(async(req, res) => {
-    res.status(200).json({ message: `delete course for ${req.params.id}`});
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+        res.status(404);
+        throw new Error('Course not found');
+    }
+    const deletedCourse = await Course.deleteOne( {_id: req.params.id});
+    res.status(200).json(deletedCourse);
 });
 
 
