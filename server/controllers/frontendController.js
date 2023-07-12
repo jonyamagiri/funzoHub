@@ -18,7 +18,7 @@ exports.homepage = async(req, res) => {
 
     //const food = { latest, thai, american, chinese };
 
-    res.render('index', { title: 'Cooking Blog - Home', categories } );
+    res.render('index', { title: 'funzoHub - Home', categories } );
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
@@ -33,7 +33,7 @@ exports.exploreCategories = async(req, res) => {
   try {
     const limitNumber = 20;
     const categories = await Category.find({}).limit(limitNumber);
-    res.render('categories', { title: 'Cooking Blog - Categoreis', categories } );
+    res.render('categories', { title: 'funzoHub - Categoreis', categories } );
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
