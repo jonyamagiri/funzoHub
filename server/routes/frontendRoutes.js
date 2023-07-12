@@ -7,6 +7,7 @@ const frontendController = require('../controllers/frontendController');
 */
 router.get('/', frontendController.homepage);
 router.get('/categories', frontendController.exploreCategories);
+router.get('/course/:id', frontendController.exploreCourse);
 
 
 module.exports = router;

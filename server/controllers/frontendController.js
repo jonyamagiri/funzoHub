@@ -11,14 +11,15 @@ exports.homepage = async(req, res) => {
   try {
     const limitNumber = 5;
     const categories = await Category.find({}).limit(limitNumber);
-    //const latest = await Recipe.find({}).sort({_id: -1}).limit(limitNumber);
-    //const thai = await Recipe.find({ 'category': 'Thai' }).limit(limitNumber);
-    //const american = await Recipe.find({ 'category': 'American' }).limit(limitNumber);
-    //const chinese = await Recipe.find({ 'category': 'Chinese' }).limit(limitNumber);
+    const latest = await Course.find({}).sort({_id: -1}).limit(limitNumber);
+    const info_tech = await Course.find({ 'category': 'Information Technology' }).limit(limitNumber);
+    const maths = await Course.find({ 'category': 'Mathematics' }).limit(limitNumber);
+    const health = await Course.find({ 'category': 'Health' }).limit(limitNumber);
 
-    //const food = { latest, thai, american, chinese };
+    const subject = { latest, info_tech, maths, health };
 
-    res.render('index', { title: 'funzoHub - Home', categories } );
+    res.render('index', { title: 'funzoHub - Home', categories, subject } );
+    //res.render('index', { title: 'funzoHub - Home', categories, latest, info_tech, maths, health } );    
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
@@ -39,5 +40,20 @@ exports.exploreCategories = async(req, res) => {
   }
 } 
 
+
+/**
+ * GET /courses
+ * Courses 
+*/
+exports.exploreCourse = async(req, res) => {
+  try {
+    //const limitNumber = 20;
+    let courseId = req.params.id;
+    const course = await Course.findById(courseId);
+    res.render('course', { title: 'funzoHub - Course', course } );
+  } catch (error) {
+    res.satus(500).send({message: error.message || "Error Occured" });
+  }
+} 
 
 

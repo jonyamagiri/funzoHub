@@ -48,46 +48,105 @@
 
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
-        <a href="/recipe/#" class="col text-center category__link">
+        <% if(typeof subject.latest !== 'undefined' && subject.latest.length > 0) { %>
+          <% subject.latest.forEach(function(course, index){ %>
+          <a href="/course/<%= course._id %>" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" Loading="lazy">
+              <img src="/uploads/<%= course.image %>" alt="<%= course.name %>" loading="lazy">
             </div>
-            <div class="pt-1">Chocolate Banoffe</div>
-        </a>
-
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" Loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banoffe</div>
-        </a>
-
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" Loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banoffe</div>
-        </a>
-
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" Loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banoffe</div>
-        </a>
-
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" Loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banoffe</div>
-        </a>
-
-    </div>
+            <div class="pt-1"><%= course.title %></div>
+          </a>
+          <% }) %>
+        <% } else { %>
+          <p>No items found.</p>
+        <% } %>
+      </div>
 
 </section>
 
 <!-- latest end -->
+
+<!-- information technology courses -->
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>Information Technology Courses</h2>
+        <a href="/categories/info_tech" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+
+        <% if(typeof subject.info_tech !== 'undefined' && subject.info_tech.length > 0) { %>
+          <% subject.info_tech.forEach(function(course, index){ %>
+          <a href="/course/<%= course._id %>" class="col text-center category__link">
+            <div class="category__img category__img--large shadow">
+              <img src="/uploads/<%= course.image %>" alt="<%= course.name %>" loading="lazy">
+            </div>
+            <div class="pt-1"><%= course.title %></div>
+          </a>
+          <% }) %>
+        <% } else { %>
+          <p>No items found.</p>
+        <% } %>
+      </div>
+
+</section>
+
+<!-- information technology end -->
+
+<!-- mathematics courses -->
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>Mathematics Courses</h2>
+        <a href="/categories/maths" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+
+        <% if(typeof subject.maths !== 'undefined' && subject.maths.length > 0) { %>
+          <% subject.maths.forEach(function(course, index){ %>
+          <a href="/course/<%= course._id %>" class="col text-center category__link">
+            <div class="category__img category__img--large shadow">
+              <img src="/uploads/<%= course.image %>" alt="<%= course.name %>" loading="lazy">
+            </div>
+            <div class="pt-1"><%= course.title %></div>
+          </a>
+          <% }) %>
+        <% } else { %>
+          <p>No items found.</p>
+        <% } %>
+      </div>
+
+</section>
+
+<!-- mathematics end -->
+
+<!-- health courses -->
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>Health Courses</h2>
+        <a href="/categories/health" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+
+        <% if(typeof subject.health !== 'undefined' && subject.health.length > 0) { %>
+          <% subject.health.forEach(function(course, index){ %>
+          <a href="/course/<%= course._id %>" class="col text-center category__link">
+            <div class="category__img category__img--large shadow">
+              <img src="/uploads/<%= course.image %>" alt="<%= course.name %>" loading="lazy">
+            </div>
+            <div class="pt-1"><%= course.title %></div>
+          </a>
+          <% }) %>
+        <% } else { %>
+          <p>No items found.</p>
+        <% } %>
+      </div>
+
+</section>
+
+<!-- health end -->
+
 
 <!-- submit section -->
 <section class="px-4 py-5 my-5 text-center">
