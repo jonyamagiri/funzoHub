@@ -13,11 +13,17 @@ const getCourses = asyncHandler(async(req, res) => {
 //@route POST /api/courses
 //@access public
 const createCourse = asyncHandler(async(req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     const { title, description, instructor, topics, category, image } = req.body;
     if (!title || !description || !instructor || !topics || !category || !image ) {
         res.status(400);
         throw new Error('All fields are required!');
+    }
+    // Check if the course already exists
+    const existingCourse = await Course.findOne({ title });
+    if (existingCourse) {
+        res.status(400);
+        throw new Error('A course with this title already exists!');
     }
     const course = await Course.create({
         title, description, instructor, topics, category, image

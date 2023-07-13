@@ -13,11 +13,17 @@ const getCategories = asyncHandler(async(req, res) => {
 //@route POST /api/categories
 //@access public
 const createCategory = asyncHandler(async(req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     const { name, image } = req.body;
     if (!name || !image ) {
         res.status(400);
         throw new Error('All fields are required!');
+    }
+    // Check if the category already exists
+    const existingCategory = await Category.findOne({ name });
+    if (existingCategory) {
+        res.status(400);
+        throw new Error('A category with this name already exists!');
     }
     const category = await Category.create({
         name, image
