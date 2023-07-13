@@ -73,3 +73,19 @@ exports.exploreCourse = async(req, res) => {
   }
 } 
 
+
+/**
+ * GET /search
+ * Search 
+*/
+exports.searchCourse = async(req, res) => {
+  try {
+    let searchTerm = req.body.searchTerm;
+    let course = await Course.find( { $text: { $search: searchTerm, $diacriticSensitive: true } });
+    res.render('search', { title: 'funzoHub - Course', course } );
+    // res.json(course);
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" });
+  }    
+} 
+
