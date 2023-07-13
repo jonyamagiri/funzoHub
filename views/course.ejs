@@ -1,0 +1,42 @@
+<% if(course != null) { %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%- course.title %></li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-12 col-md-4">
+    <img src="/uploads/<%- course.image %>" class="img-fluid sticky-top" style="top: 20px"
+      alt="<%- course.title %>" loading="lazy"/>
+  </div>
+
+  <div class="col-12 col-md-8">
+    <div class="row">
+      <div class="col-12"><h1><%- course.title %></h1></div>
+      <div class="col-12 mb-4">
+        <i class="bi bi-tag"></i> <%- course.category %>
+      </div>
+      <div class="col-12" style="white-space: pre-line">
+        <h4>Course Overview</h4>
+            <p class="lead"> <%- course.description %> </p>        
+      </div>
+    </div>
+
+    <div class="row pt-4">
+      <div class="col-12">
+        <h4>Major topics:</h4>
+        <ul class="list-group list-group-flush">
+          <% course.topics.forEach(function(topics, index){ %>
+          <li class="list-group-item lead"><%= topics %></li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<% } else { %>
+<p>No item found.</p>
+<% } %>
