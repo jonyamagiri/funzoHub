@@ -59,7 +59,7 @@ exports.exploreCategoriesById = async(req, res) => {
 
 
 /**
- * GET /courses
+ * GET /courses/:id
  * Courses 
 */
 exports.exploreCourse = async(req, res) => {
@@ -89,3 +89,33 @@ exports.searchCourse = async(req, res) => {
   }    
 } 
 
+
+/**
+ * GET /explore-latest
+ * Explore Latest Courses
+*/
+exports.exploreLatest = async(req, res) => {
+  try {
+    const limitNumber = 20;
+    const course = await Course.find({}).sort({_id: -1}).limit(limitNumber); 
+    res.render('explore-latest', { title: 'funzoHub - Explore Latest', course } );
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" });
+  }
+} 
+
+
+/**
+ * GET /explore-random
+ * Explore Random Courses
+*/
+exports.exploreRandom = async(req, res) => {
+  try {
+    const count = await Course.find().countDocuments();
+    const random = Math.floor(Math.random() * count);
+    const course = await Course.find().limit(3).skip(random - 1).exec();
+    res.render('explore-random', { title: 'funzoHub - Explore Random', course });
+  } catch (error) {
+    res.status(500).send({ message: error.message || 'Error occurred' });
+  }
+};
