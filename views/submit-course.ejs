@@ -1,0 +1,75 @@
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Become a Course Creator</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead"> Have you created a course that the world would benefit from and wish to share your knowledge? Then we want to hear from you!
+        <br>
+        Fill our form to get started.</p>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+  
+
+    <div class="col-8">
+  
+      <form action="/submit-course" enctype="multipart/form-data" method="POST">
+      
+        <div class="row g-3">
+  
+          <div class="col-12">
+            <label for="instructor" class="form-label">Instructor's name</label>
+            <input type="text" name="instructor" id="instructor" class="form-control" required>
+          </div>
+  
+          <div class="col-12">
+            <label for="title" class="form-label">Course title</label>
+            <input type="text" name="title" id="title" class="form-control" required>
+          </div>
+          
+          <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" cols="30" rows="4"></textarea>
+          </div>
+  
+          <div class="col-12">
+            <label for="name" class="form-label">Major topics</label><br>
+            <small>Example: Introduction to Ruby on Rails</small>
+            <div class="topictList">
+              <div class="topicDiv mb-1">
+                <input type="text" name="topics" class="form-control">
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-12">
+            <button type="button" class="btn btn-outline-primary" id="addTopicsBtn">+ Topic</button>
+          </div>
+  
+          <div class="col-12">
+            <label for="category">Select Category</label>
+            <select class="form-select form-control" name="category" aria-label="Category">
+              <option selected>Please choose one ... </option>
+              <option value="Web Development">Web Development</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Health">Health</option>
+              <option value="Business">Business</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Social Sciences">Social Sciences</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label for="image">Course image</label>
+            <input type="file" class="form-control" name="image" accept="image/*">
+          </div>
+  
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit Course</button>
+          </div>
+  
+        </div>
+      
+      </form>
+  
+    </div>
+  </div>
