@@ -12,6 +12,7 @@ router.get('/categories/:id', frontendController.exploreCategoriesById);
 router.post('/search', frontendController.searchCourse);
 router.get('/explore-latest', frontendController.exploreLatest);
 router.get('/explore-random', frontendController.exploreRandom);
+router.get('/submit-course', frontendController.submitCourse);
 
 
 module.exports = router;

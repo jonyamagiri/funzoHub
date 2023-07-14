@@ -31,6 +31,7 @@ const courseSchema = mongoose.Schema({
     timestamps: true,
 });
 
+// indexing functionality that enables search in db
 courseSchema.index({ name: 'text', description: 'text' });
 
 

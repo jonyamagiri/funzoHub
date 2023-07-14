@@ -113,9 +113,26 @@ exports.exploreRandom = async(req, res) => {
   try {
     const count = await Course.find().countDocuments();
     const random = Math.floor(Math.random() * count);
+    // checks random value; ensures that skip value is always >= 0
+    if (random < 1) {
+      random = 0;
+    }
     const course = await Course.find().limit(3).skip(random - 1).exec();
     res.render('explore-random', { title: 'funzoHub - Explore Random', course });
   } catch (error) {
     res.status(500).send({ message: error.message || 'Error occurred' });
   }
+};
+
+
+/**
+ * GET /submit-course
+ * Submit a course
+*/
+exports.submitCourse = async(req, res) => {
+try {
+  res.render('submit-course', { title: 'funzoHub - Submit Course' });
+} catch (error) {
+  res.status(500).send({ message: error.message || 'Error occurred' });
+}
 };
