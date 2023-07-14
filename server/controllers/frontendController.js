@@ -92,11 +92,11 @@ exports.searchCourse = async(req, res) => {
 
 /**
  * GET /explore-latest
- * Explore Latest Courses
+ * Explore Latest (recently added) Courses
 */
 exports.exploreLatest = async(req, res) => {
   try {
-    const limitNumber = 20;
+    const limitNumber = 10;
     const course = await Course.find({}).sort({_id: -1}).limit(limitNumber); 
     res.render('explore-latest', { title: 'funzoHub - Explore Latest', course } );
   } catch (error) {
