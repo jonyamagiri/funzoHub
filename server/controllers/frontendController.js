@@ -1,6 +1,7 @@
 require("../utils/db");
 const Category = require("../models/categoryModel");
 const Course = require("../models/courseModel");
+const User = require('../models/userModel')
 
 /**
  * GET /
@@ -27,6 +28,44 @@ exports.homepage = async (req, res) => {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
+
+// users logic (login /register)
+// router.post('/login', frontendController.login);
+// router.post('/signUpUser', frontendController.signUpUser);
+// router.get('/loginPage', frontendController.loginPage);
+// router.get('/signUpPage', frontendController.signUpPage);
+
+/**
+ * GET /register page
+ * Login
+ */
+exports.loginPage = async (req, res) => {
+  try {    
+    res.render("loginPage", { title: "funzoHub - Login" });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" });
+  }
+};
+
+/**
+ * GET /login page
+ * Login
+ */
+exports.signUpPage = async (req, res) => {
+  try {    
+    res.render("signUpPage", { title: "funzoHub - Sign Up" });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" });
+  }
+};
+
+
+
+
+
+
+
+// categories logic
 
 /**
  * GET /categories
@@ -77,6 +116,8 @@ exports.exploreCourse = async (req, res) => {
   }
 };
 
+// search logic
+
 /**
  * GET /search
  * Search
@@ -93,6 +134,8 @@ exports.searchCourse = async (req, res) => {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
+
+// courses logic
 
 /**
  * GET /explore-latest
