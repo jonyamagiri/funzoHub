@@ -13,6 +13,7 @@ router.post('/search', frontendController.searchCourse);
 router.get('/explore-latest', frontendController.exploreLatest);
 router.get('/explore-random', frontendController.exploreRandom);
 router.get('/submit-course', frontendController.submitCourse);
+router.post('/submit-course', frontendController.submitCoursePost);
 
 
 module.exports = router;
