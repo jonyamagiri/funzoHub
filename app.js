@@ -18,8 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(expressLayouts);
 
-app.set("layout", "./layouts/main");
+app.set("layout", "./layouts/main"); // sets main.ejs as master-template
 app.set("view engine", "ejs");
+// app.set("views", "views");
 app.use(logger('dev')); // adds logging functionality to console
 
 // flash messages

@@ -22,7 +22,7 @@ router.get('/submit-course', frontendController.submitCourse);
 router.post('/search', frontendController.searchCourse);
 router.post('/submit-course', frontendController.submitCoursePost);
 // router.post('/login', frontendController.login);
-// router.post('/signUpUser', frontendController.signUpUser);
+router.post('/signUpPage', frontendController.signUpPagePost);
 
 module.exports = router;
 

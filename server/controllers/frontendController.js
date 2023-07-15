@@ -1,7 +1,8 @@
 require("../utils/db");
+const bcrypt = require("bcrypt");
 const Category = require("../models/categoryModel");
 const Course = require("../models/courseModel");
-const User = require('../models/userModel')
+const User = require("../models/userModel");
 
 /**
  * GET /
@@ -32,36 +33,90 @@ exports.homepage = async (req, res) => {
 // users logic (login /register)
 // router.post('/login', frontendController.login);
 // router.post('/signUpUser', frontendController.signUpUser);
-// router.get('/loginPage', frontendController.loginPage);
-// router.get('/signUpPage', frontendController.signUpPage);
 
 /**
- * GET /register page
+ * GET /Sign Up page
+ * Sign Up
+ */
+exports.signUpPage = async (req, res) => {
+  try {
+    res.render("signUpPage", { title: "funzoHub - Sign Up", layout: false });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" });
+  }
+};
+
+/**
+ * GET /Login page
  * Login
  */
 exports.loginPage = async (req, res) => {
-  try {    
-    res.render("loginPage", { title: "funzoHub - Login" });
+  try {
+    res.render("loginPage", { title: "funzoHub - Login", layout: false });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
 /**
- * GET /login page
- * Login
+ * POST /Sign Up page
+ * Sign Up
  */
-exports.signUpPage = async (req, res) => {
-  try {    
-    res.render("signUpPage", { title: "funzoHub - Sign Up" });
-  } catch (error) {
-    res.status(500).send({ message: error.message || "Error Occured" });
+exports.signUpPagePost = async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    // Check if the user already exists
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ message: "Email address already exists" });
+    }
+
+    // Create a new user instance
+    user = new User({
+      username,
+      email,
+      password,
+    });
+
+    // Save the user to the database
+    await user.save();
+
+    res.redirect("/"); // Redirect to the home page
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
   }
 };
 
+/**
+ * POST /Log In page
+ * Log in
+ */
+exports.loginPagePost = async (req, res) => {
+  const { email, password } = req.body;
 
+  try {
+    // Find the user in the database
+    const user = await User.findOne({ email });
 
+    if (!user) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
 
+    // Compare the provided password with the stored password
+    const isMatch = await user.comparePassword(password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    res.redirect("/"); // Redirect to the home page
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
 
 
 
