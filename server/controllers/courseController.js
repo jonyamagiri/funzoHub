@@ -72,6 +72,38 @@ const deleteCourse = asyncHandler(async(req, res) => {
     res.status(200).json(deletedCourse);
 });
 
+// //@desc create a new course
+// //@route POST /api/courses
+// //@access public
+// const submitCourse = asyncHandler(async(req, res) => {
+//     // Get the post data from the request body.
+//     const { title, description, instructor, topics, category, image } = req.body;
+
+//     // Check if all of the required fields are present in the post data.
+//     if (!title || !description || !instructor || !topics || !category || !image) {
+//         res.status(400);
+//         throw new Error('All fields are required!');
+//     }
+
+//     // Check if a course with the same title already exists in the database.
+//     const existingCourse = await Course.findOne({ title });
+//     if (existingCourse) {
+//         res.status(400);
+//         throw new Error('A course with this title already exists!');
+//     }
+
+//     // Create a new course in the database.
+//     const course = await Course.create({
+//         title, description, instructor, topics, category, image
+//     });
+
+//     // Serialize the new course object and return it in the response.
+//     res.status(201).json(course);
+// });
+
+
+
+
 
 
 module.exports = { getCourses, createCourse, getCourse, updateCourse, deleteCourse };

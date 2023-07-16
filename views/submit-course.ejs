@@ -8,11 +8,21 @@
   </div>
 
   <div class="row justify-content-center">
+    <% if(infoSubmitObj != '') { %>
+      <div class="col-8 alert alert-success" role="alert">
+        <%= infoSubmitObj %>
+      </div>
+    <% } %>
   
+    <% if(infoErrorsObj != '') { %>
+      <div class="col-8 alert alert-danger" role="alert">
+        <%= infoErrorsObj[0].message %>
+      </div>
+    <% } %>  
 
     <div class="col-8">
   
-      <form action="/submit-course" enctype="multipart/form-data" method="POST">
+      <form action="/submit-course" enctype="multipart/form-data" method="POST" autocomplete="off">
       
         <div class="row g-3">
   
@@ -29,26 +39,27 @@
           <div class="col-12">
             <label for="description" class="form-label">Description</label>
             <textarea name="description" id="description" class="form-control" cols="30" rows="4"></textarea>
-          </div>
-  
+          </div>  
+         
           <div class="col-12">
             <label for="name" class="form-label">Major topics</label><br>
             <small>Example: Introduction to Ruby on Rails</small>
-            <div class="topictList">
+            <div class="topicsList">
               <div class="topicDiv mb-1">
-                <input type="text" name="topics" class="form-control">
+                <input type="text" name="topics" class="form-control">                
               </div>
             </div>
           </div>
   
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" class="btn btn-outline-primary" id="addTopicsBtn">+ Add</button>
+            <button type="button" class="btn btn-outline-danger" id="removeTopicBtn">- Delete</button>            
+          </div>  
+
           <div class="col-12">
-            <button type="button" class="btn btn-outline-primary" id="addTopicsBtn">+ Topic</button>
-          </div>
-  
-          <div class="col-12">
-            <label for="category">Select Category</label>
-            <select class="form-select form-control" name="category" aria-label="Category">
-              <option selected>Please choose one ... </option>
+            <label for="category">Select category</label>
+            <select class="form-select form-control" name="category" id="category" aria-label="Category">
+              <option selected>Please choose one ...</option>
               <option value="Web Development">Web Development</option>
               <option value="Information Technology">Information Technology</option>
               <option value="Health">Health</option>
@@ -64,7 +75,7 @@
           </div>
   
           <div class="col-12">
-            <button type="submit" class="btn btn-primary">Submit Course</button>
+            <button type="submit" class="btn btn-primary mb-4">Submit Course</button>
           </div>
   
         </div>

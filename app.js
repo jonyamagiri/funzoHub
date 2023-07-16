@@ -3,6 +3,10 @@ const dotenv = require("dotenv").config();
 const connectDb = require('./server/utils/db');
 const expressLayouts = require("express-ejs-layouts");
 const logger = require('morgan');
+const fileUpload = require('express-fileupload');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 
 
 connectDb();
@@ -14,10 +18,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(expressLayouts);
 
-app.set("layout", "./layouts/main");
+app.set("layout", "./layouts/main"); // sets main.ejs as master-template
 app.set("view engine", "ejs");
+// app.set("views", "views");
 app.use(logger('dev')); // adds logging functionality to console
 
+// flash messages
+app.use(cookieParser('CookingBlogSecure'));
+app.use(session({
+  secret: 'CookingBlogSecretSession',
+  saveUninitialized: true,
+  resave: true
+}));
+app.use(flash());
+app.use(fileUpload());
 
 // API Routes
 app.use('/api/courses', require('./server/routes/courseRoutes'));
