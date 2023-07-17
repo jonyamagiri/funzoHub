@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const frontendController = require('../controllers/frontendController');
+const cookieJwtAuth = require('../middleware/cookieHandler');
+
+
 
 /**
  * frontend routes 
@@ -9,22 +12,20 @@ const frontendController = require('../controllers/frontendController');
 // GET routes
 router.get('/loginPage', frontendController.loginPage);
 router.get('/signUpPage', frontendController.signUpPage);
-router.get('/', frontendController.homepage);
-router.get('/categories', frontendController.exploreCategories);
-router.get('/course/:id', frontendController.exploreCourse);
-router.get('/categories/:id', frontendController.exploreCategoriesById);
-router.get('/explore-latest', frontendController.exploreLatest);
-router.get('/explore-random', frontendController.exploreRandom);
-router.get('/submit-course', frontendController.submitCourse);
+router.post('/logout', frontendController.logout);
+router.get('/', cookieJwtAuth, frontendController.homepage);
+router.get('/categories', cookieJwtAuth, frontendController.exploreCategories);
+router.get('/course/:id', cookieJwtAuth, frontendController.exploreCourse);
+router.get('/categories/:id', cookieJwtAuth, frontendController.exploreCategoriesById);
+router.get('/explore-latest', cookieJwtAuth, frontendController.exploreLatest);
+router.get('/explore-random', cookieJwtAuth, frontendController.exploreRandom);
+router.get('/submit-course',cookieJwtAuth, frontendController.submitCourse);
 
 
 // POST routes
-router.post('/search', frontendController.searchCourse);
-router.post('/submit-course', frontendController.submitCoursePost);
-// router.post('/login', frontendController.login);
+router.post('/search', cookieJwtAuth, frontendController.searchCourse);
+router.post('/submit-course', cookieJwtAuth, frontendController.submitCoursePost);
+router.post('/loginPage', frontendController.loginPagePost);
 router.post('/signUpPage', frontendController.signUpPagePost);
 
 module.exports = router;
-
-
-

@@ -30,19 +30,23 @@
         </header>
                        
             <div class="container fluid col-6 col-lg-6 align-items-center mt-3">
-                <h2>Login to your account</h2>
+                <h2>Login</h2>
                 <form action="/loginPage" method="POST" autocomplete="off">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" name="email" placeholder="Enter your email address" class="form-control" id="email">                      
+                        <input type="email" name="email" placeholder="Enter your email address" class="form-control" id="email" required>                      
                       </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password" name="password" placeholder="********" class="form-control" id="password">
+                      <input type="password" name="password" placeholder="********" class="form-control" id="password" required>
                     </div>                    
                     <button type="submit" class="btn btn-primary">Log In</button>
                   </form>
                   <br>
+                  <div >
+                    <p>Don't have an account?    <a href="/signUpPage">Sign Up</a></p>
+                  </div>
+                  <!--  
                   <div class="d-grid gap-2 d-md-flex row align-items-center">
                     <div class="col-auto">
                         <p>Don't have an account?</p>
@@ -51,7 +55,8 @@
                         <a href="/signUpPage" class="btn btn-outline-secondary btn-md">Sign Up</a>
                     </div>                  
                     
-                </div>                  
+                </div>  
+                -->                
             </div>            
         </div>  
 

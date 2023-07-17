@@ -34,19 +34,23 @@
                 <form action="/signUpPage" method="POST" autocomplete="off">
                     <div class="mb-3">
                       <label for="username" class="form-label">Username</label>
-                      <input type="username" name="username" placeholder="Enter your username" class="form-control" id="username">                      
+                      <input type="username" name="username" placeholder="Enter your username" class="form-control" id="username" required>                      
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" name="email" placeholder="Enter your email address" class="form-control" id="email">                      
+                        <input type="email" name="email" placeholder="Enter your email address" class="form-control" id="email" required>                      
                       </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password" name="password" placeholder="*********" class="form-control" id="password">
+                      <input type="password" name="password" placeholder="*********" class="form-control" id="password" required>
                     </div>                    
                     <button type="submit" class="btn btn-primary">Sign Up</button>
                   </form>
                   <br>
+                  <div >
+                    <p>Already have an account?   <a href="/loginPage">Log in</a></p>
+                  </div>
+                  <!--  
                   <div class="d-grid gap-2 d-md-flex row align-items-center">
                     <div class="col-auto">
                         <p>Already have an account?</p>
@@ -55,7 +59,8 @@
                         <a href="/loginPage" class="btn btn-outline-secondary btn-md">Log in</a>
                     </div>                  
                     
-                </div>                  
+                </div>  
+                -->                
             </div>            
         </div>  
 

@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const Category = require("../models/categoryModel");
 const Course = require("../models/courseModel");
 const User = require("../models/userModel");
+const jwt = require("jsonwebtoken");
 
 /**
  * GET /
@@ -64,25 +65,26 @@ exports.loginPage = async (req, res) => {
  */
 exports.signUpPagePost = async (req, res) => {
   const { username, email, password } = req.body;
-
   try {
-    // Check if the user already exists
-    let user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ message: "Email address already exists" });
+    if (!username || !email || !password) {
+      res.status(400);
+      throw new Error("All fields are mandatory");
     }
-
-    // Create a new user instance
-    user = new User({
+    const userAvailable = await User.findOne({ email });
+    if (userAvailable) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
+    //Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    // console.log("Hashed password: ", hashedPassword);
+    const user = await User.create({
       username,
       email,
-      password,
+      password: hashedPassword,
     });
 
-    // Save the user to the database
-    await user.save();
-
-    res.redirect("/"); // Redirect to the home page
+    res.redirect("loginPage"); // Redirect to the login page
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
@@ -93,31 +95,65 @@ exports.signUpPagePost = async (req, res) => {
  * POST /Log In page
  * Log in
  */
+
 exports.loginPagePost = async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(400);
+    throw new Error("All fields are mandatory");
+  }
 
   try {
     // Find the user in the database
-    const user = await User.findOne({ email });
-
-    if (!user) {
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
-
-    // Compare the provided password with the stored password
-    const isMatch = await user.comparePassword(password);
-
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid email or password" });
+    const isMatch = await bcrypt.compare(password, existingUser.password);
+    if (isMatch) {
+      const token = jwt.sign(
+        {
+          user: {
+            username: existingUser.username,
+            email: existingUser.email,
+            id: existingUser.id,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "15m" }
+      );
+      res.cookie("token", token, {
+        httponly: true,
+        // secure: true,
+        // maxAge: 1000000,
+        // signed: true,
+      });
+      // res.status(200).json({ user:existingUser, accessToken:accessToken });
+      return res.redirect("/"); // // Redirect to the home page
+    } else {
+      res.status(400).json({ message: "Invalid email or password" });
+      // Or use res.redirect("/login") if you prefer to redirect with an error message
     }
-
-    res.redirect("/"); // Redirect to the home page
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
   }
 };
 
+/**
+ * POST /Log Out page
+ * Log Out
+ */
+
+exports.logout = async (req, res) => {
+  try {
+    await res.clearCookie("token");   // Clear the token cookie
+    return res.redirect("/loginPage"); // Redirect the user to the login page
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  } 
+};
 
 
 // categories logic
