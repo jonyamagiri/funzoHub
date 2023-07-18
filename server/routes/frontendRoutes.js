@@ -12,7 +12,7 @@ const cookieJwtAuth = require('../middleware/cookieHandler');
 // GET routes
 router.get('/loginPage', frontendController.loginPage);
 router.get('/signUpPage', frontendController.signUpPage);
-router.post('/logout', frontendController.logout);
+router.get('/logout', frontendController.logout);
 router.get('/', cookieJwtAuth, frontendController.homepage);
 router.get('/categories', cookieJwtAuth, frontendController.exploreCategories);
 router.get('/course/:id', cookieJwtAuth, frontendController.exploreCourse);

@@ -25,15 +25,11 @@ exports.homepage = async (req, res) => {
     const subject = { latest, info_tech, maths, health };
 
     res.render("index", { title: "funzoHub - Home", name: req.user.username, categories, subject });
-    //res.render('index', { title: 'funzoHub - Home', categories, latest, info_tech, maths, health } );
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
-// users logic (login /register)
-// router.post('/login', frontendController.login);
-// router.post('/signUpUser', frontendController.signUpUser);
 
 /**
  * GET /Sign Up page
@@ -74,10 +70,8 @@ exports.signUpPagePost = async (req, res) => {
     if (userAvailable) {
       res.status(400);
       throw new Error("User already exists");
-    }
-    //Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    // console.log("Hashed password: ", hashedPassword);
+    }    
+    const hashedPassword = await bcrypt.hash(password, 10); //hash password
     const user = await User.create({
       username,
       email,
@@ -102,10 +96,8 @@ exports.loginPagePost = async (req, res) => {
     res.status(400);
     throw new Error("All fields are mandatory");
   }
-
-  try {
-    // Find the user in the database
-    const existingUser = await User.findOne({ email });
+  try {    
+    const existingUser = await User.findOne({ email }); // if user is in db
     if (!existingUser) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
@@ -128,11 +120,9 @@ exports.loginPagePost = async (req, res) => {
         // maxAge: 1000000,
         // signed: true,
       });
-      // res.status(200).json({ user:existingUser, accessToken:accessToken });
-      return res.redirect("/"); // // Redirect to the home page
+      return res.redirect("/"); // // redirect to homepage
     } else {
       res.status(400).json({ message: "Invalid email or password" });
-      // Or use res.redirect("/login") if you prefer to redirect with an error message
     }
   } catch (err) {
     console.error(err);
@@ -220,7 +210,6 @@ exports.searchCourse = async (req, res) => {
       $text: { $search: searchTerm, $diacriticSensitive: true },
     });
     res.render("search", { title: "funzoHub - Course", course });
-    // res.json(course);
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
@@ -334,7 +323,6 @@ exports.submitCoursePost = async (req, res) => {
       res.redirect("/submit-course");
     }
   } catch (error) {
-    // res.json(error);
     req.flash("infoErrors", error);
     res.redirect("/submit-course");
   }
