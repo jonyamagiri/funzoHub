@@ -33,6 +33,7 @@ app.use(session({
 app.use(flash());
 app.use(fileUpload());
 
+
 // API Routes
 app.use('/api/courses', require('./server/routes/courseRoutes'));
 app.use('/api/users', require('./server/routes/userRoutes'));

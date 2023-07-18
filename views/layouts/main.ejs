@@ -12,7 +12,7 @@
     <!-- bootstrap CDN styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Rubik:wght@300;500&display=swap"
@@ -37,21 +37,17 @@
                 <li>
                     <a href="/about" class="nav-link px-2 link-secondary fs-5">About</a>
                 </li>
-                <!-- hidden 
-                <li>
-                    <a href="/submit-course" class="nav-link px-2 link-secondary fs-5">Submit</a>
-                </li>
-                    -->                
-                <li>
-                    <a href="/logout" class="nav-link px-2 link-secondary fs-5">Log out</a>
-                </li>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Welcome
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/submit-course">Submit a Course</a></li>
+                            <li><a class="dropdown-item" href="/donate">Make a Donation</a></li>                         
+                            <li><a class="dropdown-item" href="/logout">Log out</a></li>                       
+                        </ul>
+                      </div>    
 
-                <li>
-                    <a href="/loginPage" class="nav-link px-2 link-secondary fs-5">Log in</a>
-                </li>
-                <li>
-                    <a href="/signUpPage" class="nav-link px-2 link-secondary fs-5">Sign up</a>
-                </li>                
             </ul>
 
             <!-- search bar -->
@@ -60,17 +56,141 @@
                 <form method="POST" action="/search">
                     <input type="search" name="searchTerm" class="form-control" placeholder="Find Courses ..."
                         aria-label="Search" />
-                </form>
+                </form>           
             </div>
         </header>
 
         <!-- main body that is unique to different pages -->
         <main><%- body -%></main>
 
-        <!-- footer section -->
-        <footer class="py-5 border-top">
+        <!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Connect with us on social media and stay in the loop:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <!-- Ogembo -->
+        <a href="https://twitter.com/@danogembo" class="me-4 text-reset">
+          <i class="bi bi-twitter me-2"></i>
+        </a>
+        <a href="https://linkedin.com/in/jonyamagiri" class="me-4 text-reset">
+          <i class="bi bi-linkedin me-2"></i>
+        </a>
+        <a href="https://github.com/jonyamagiri" class="me-4 text-reset">
+          <i class="bi bi-github me-2"></i>
+        </a>
+        <!-- Chibuzo -->
+        <a href="" class="me-4 text-reset">
+          <i class="bi bi-twitter me-2"></i>
+        </a>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="bi bi-linkedin me-2"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="bi bi-github me-2"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <a href="/" class="dflex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+              <img src="/img/funzoHub_4.png" width="120" height="120" alt="funzoHub- Elevate your skills" />
+          </a>
+            <!-- Content -->            
+            <p>
+              Elevate your skills and shape your future with our online learning platform.
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Products
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">Web Development</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Business</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Mathematics</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Health</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Useful links
+            </h6>
+            <p>
+              <a href="/categories" class="text-reset">Courses</a>
+            </p>
+            <p>
+              <a href="/submit-course" class="text-reset">Submit a course</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">About</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Make a donation</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact Us</h6>
+            <p><i class="bi bi-house me-3"></i> Nairobi, NBI 874, KE</p>
+            <p>
+              <i class="bi bi-envelope me-3"></i>
+              funzohub@info.com
+            </p>
+            <p><i class="bi bi-phone me-3"></i> + 254 *** ***</p>
+            <p><i class="bi bi-printer me-3"></i> + 234 *** ***</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2023 Copyright:
+      <a class="text-reset fw-bold" href="/">funzoHub</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+        <!-- <footer class="py-5 border-top">
             <p>Built by iCreate Team</p>
-        </footer>
+        </footer> -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

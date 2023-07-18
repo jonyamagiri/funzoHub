@@ -24,7 +24,7 @@ exports.homepage = async (req, res) => {
 
     const subject = { latest, info_tech, maths, health };
 
-    res.render("index", { title: "funzoHub - Home", categories, subject });
+    res.render("index", { title: "funzoHub - Home", name: req.user.username, categories, subject });
     //res.render('index', { title: 'funzoHub - Home', categories, latest, info_tech, maths, health } );
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
