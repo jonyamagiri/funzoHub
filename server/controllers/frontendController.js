@@ -327,3 +327,21 @@ exports.submitCoursePost = async (req, res) => {
     res.redirect("/submit-course");
   }
 };
+
+
+/**
+ * GET /donate
+ * Make a donation page
+ */
+exports.donate = async (req, res) => {
+  res.render("donate", { title: "funzoHub - Donate" });
+};
+
+
+/**
+ * GET /about
+ * About us page
+ */
+exports.about = async (req, res) => {
+  res.render("about", { title: "funzoHub - About Us" });
+};
