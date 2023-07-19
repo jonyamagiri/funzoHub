@@ -13,9 +13,9 @@ const cookieJwtAuth = require('../middleware/cookieHandler');
 router.get('/loginPage', frontendController.loginPage);
 router.get('/signUpPage', frontendController.signUpPage);
 router.get('/logout', frontendController.logout);
-router.get('/about', cookieJwtAuth, frontendController.about);
+router.get('/', frontendController.homepage); // acts as landing page, user to get feel of site
+router.get('/about', frontendController.about); // acts as landing page, user to get feel of site
 router.get('/donate', cookieJwtAuth, frontendController.donate);
-router.get('/', cookieJwtAuth, frontendController.homepage);
 router.get('/categories', cookieJwtAuth, frontendController.exploreCategories);
 router.get('/course/:id', cookieJwtAuth, frontendController.exploreCourse);
 router.get('/categories/:id', cookieJwtAuth, frontendController.exploreCategoriesById);
