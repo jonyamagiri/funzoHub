@@ -103,7 +103,4 @@ const deleteCourse = asyncHandler(async(req, res) => {
 
 
 
-
-
-
 module.exports = { getCourses, createCourse, getCourse, updateCourse, deleteCourse };

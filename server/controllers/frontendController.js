@@ -112,7 +112,7 @@ exports.loginPagePost = async (req, res) => {
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "15m" }
+        { expiresIn: "30m" }
       );
       res.cookie("token", token, {
         httponly: true,
